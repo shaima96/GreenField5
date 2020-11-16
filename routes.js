@@ -1,6 +1,8 @@
 const express = require('express');
 const routers = express.Router();
 const User = require('./db').users
+const payment = require('./db').payment
+
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
 const { Router } = require('express');
@@ -70,14 +72,40 @@ routers.post('/register', async (req, res) => {
 });
 
 
-routers.post('/payment', auth, (req, res) => {
-    // auth(req, res)
-    User.findOne({ _id: req.user._id }, (err, data) => {
-        if (err) {
-            res.status(400).send('err')
-        }
+// //routers.post('/payment', auth, (req, res) => {
+
+//     // auth(req, res)
+//     User.findOne({ _id: req.user._id }, (err, data) => {
+//         if (err) {
+//             res.status(400).send('err')
+//         }
+//         return res.status(200).send(data)
+//     })
+// })
+
+routers.post('/checkpayment',(req,res)=>{
+    console.log(req.body)
+   // res.send(req.body)
+    var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+//today = mm + '/' + dd + '/' + yyyy;
+today = new Date();
+var ex = new Date(req.body.exDate)
+console.log(new Date(req.body.exDate))
+payment.findOne({exDate: req.body.exDate,creditCard: req.body.creditCard,cvv: req.body.cvv},(err,data)=>{
+    console.log(today)
+    if(ex.getTime()>today.getTime()){
         return res.status(200).send(data)
-    })
+       }
+    return   res.status(400).send('err')
+    
+}) 
+  
 })
+
+
 
 module.exports = routers;
