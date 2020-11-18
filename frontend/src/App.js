@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from './components/Homepage/Navbar';
 import Footer from './components/Homepage/Footer';
 import Home from './components/Homepage/Home'
-// import $ from 'jquery'
+import $ from 'jquery'
 
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -13,7 +13,7 @@ import Trip from './components/trips/trips'
 import Signup from './components/user/signup'
 import Payment from './components/payment/payment'
 import Profile from './components/user/Profile';
-
+import Navbar2 from './components/Homepage/Navbar-login';
 
 
 class App extends React.Component {
@@ -21,10 +21,15 @@ class App extends React.Component {
     super(props);
     this.state = {
       islogin: true,
-      hello: 'hello for reeal'
+      hello: 'hello for reeal',
+      isuser: false,
+      tokenin:""
+
     }
     this.changeLogInStatus = this.changeLogInStatus.bind(this)
     this.getup = this.getup.bind(this)
+    this.getTrips = this.getTrips.bind(this)
+    this.changeUserStatus = this.changeUserStatus.bind(this)
 
   }
   changeLogInStatus() {
@@ -33,6 +38,25 @@ class App extends React.Component {
       tokenin: ''
     })
   }
+  changeUserStatus() {
+    this.setState({
+      isuser: !this.state.isuser,
+      
+    })
+  }
+  getTrips(){
+    $.ajax({
+        type:"GET",
+        url:"/gettrips",
+        success: function(res){
+            console.log("my first ajax request yay"+res)
+        },
+        error:function(err){
+            console.error(err)
+        }
+    })
+  }
+  
 
   getup() {
     console.log('all the way from the app, Hi!')
@@ -42,6 +66,7 @@ class App extends React.Component {
       tokenin: document.cookie
     })
     document.documentElement.scrollTop = 0;
+    this.getTrips()
 
   }
   render() {
@@ -49,23 +74,29 @@ class App extends React.Component {
       console.log('hi')
     }
     const { islogin } = this.state
+    const { isuser } = this.state
     let comp
+    let nav
     if (islogin) {
       comp = <Route
         path='/sign-up'
         render={(props) => <Signup toggleLogin={this.changeLogInStatus} />}
       />
+
+      
     }
     else {
       comp = <Route
         path='/sign-up'
-        render={(props) => <Login toggleLogin={this.changeLogInStatus} hello='hello' />}
+        render={(props) => <Login toggleuser={this.changeUserStatus} toggleLogin={this.changeLogInStatus} hello='hello' />}
       />
     }
+    if(this.state.tokenin){ nav = <Navbar2></Navbar2>}
+    else{nav = <Navbar></Navbar>}
     return (
       <>
         <Router>
-          <Navbar />
+          {nav}
           <Switch>
             {comp}
             <Route
