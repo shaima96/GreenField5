@@ -7,6 +7,26 @@ exports.signUpUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const hashedPass = await bcrypt.hash(req.body.userPass, salt)
     // User Data when Signing up
+    console.log(req.body)
+    userMail = req.body.userMail
+    userpas = req.body.userPass
+    if (!req.body.userfirstName) {
+        return res.status(451).send('error')
+
+
+    }
+
+    if (!userpas) {
+        return res.status(421).send('error')
+
+    }
+
+
+    if (!userMail) {
+        return res.status(411).send('error')
+
+    }
+
     UserModel.findOne({ userMail: req.body.userMail }, (err, user) => {
         if (err) {
             console.log(err)
@@ -37,11 +57,17 @@ exports.signUpUser = async (req, res) => {
 exports.loginUser = (req, res) => {
     var userMail = req.body.userMail
     var userPass = req.body.userPass
+    if (!userMail) {
+        return res.status(410).send('error')
+
+    }
     UserModel.findOne({ userMail: userMail }, async (err, user) => {
+
         if (err) {
             console.log(err)
             return res.status(500).send('error')
         }
+
         if (!user) {
             console.log('user not found')
             return res.status(404).send('not found user')
@@ -66,4 +92,17 @@ exports.userlogout = (req, res) => {
     res.status(200).send(req.user)
 
 
+}
+
+exports.userData = (req, res) => {
+    //var usertrip = req.body.trips
+    UserModel.findOne({ _id: req.body.id }, (err, userData) => {
+        if (err) {
+            console.log('user not found')
+            return res.status(404).send('not found user')
+        } else {
+            //console.log(userData.trips)
+            res.send(userData)
+        }
+    })
 }
