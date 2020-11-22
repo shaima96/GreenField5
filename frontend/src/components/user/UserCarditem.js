@@ -7,19 +7,17 @@ class CardItem extends React.Component {
         super(props)
         this.state = {
         }
-
     }
+    //User card
     render() {
         return (
-
             <>
                 <li className='cards__item' style={{ "backgroundColor": 'white' }}>
                     <Link className='cards__item__link' to={{
                         pathname: this.props.path,
                         state: {
                             trip: this.props.trip
-                        },
-                        getup: this.props.getup,
+                        }
                     }}>
                         <figure className='cards__item__pic-wrap' data-category={this.props.label}>
                             <img
@@ -33,7 +31,8 @@ class CardItem extends React.Component {
                         </div>
                     </Link>
                 </li>
-            </>)
+            </>
+            )
     };
 }
 

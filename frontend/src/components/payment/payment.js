@@ -12,26 +12,20 @@ class Payment extends React.Component {
             tripid: '',
             idOfTourist: ''
         }
-
         this.handelchange = this.handelchange.bind(this)
         this.checkPayment = this.checkPayment.bind(this)
-
     }
 
     handelchange(e) {
         this.setState({
             [e.target.name]: e.target.value
         })
-        // console.log(e.target.value)
     }
     componentDidMount() {
         document.documentElement.scrollTop = 0;
         this.setState({
             tripid: this.props.location.state.tripid
         })
-        console.log(this.props.location.state.tripid, 'trip')
-        console.log(this.props.location.state.userid, 'user')
-
     }
 
     checkPayment() {
@@ -44,6 +38,7 @@ class Payment extends React.Component {
             id: this.props.location.state.tripid,
             idOfTourist: this.props.location.state.userid
         }
+        //send request to check payment info
         $.ajax({
             method: 'POST',
             url: '/payment',
@@ -51,7 +46,7 @@ class Payment extends React.Component {
             success: function (res) {
                 //another ajax to update db !!
                 console.log(res)
-                //alert('enjoy your trip')
+                //if the payment information is correct - update user trips array and trips tourist array
                 $.ajax({
                     method: 'POST',
                     url: '/addtrip',
@@ -63,7 +58,6 @@ class Payment extends React.Component {
                             document.getElementById("wait").innerHTML = "<div class='alert alert-secondary' role='alert'>Wait a moment please</div>"
                             setTimeout(() => {
                                 setTimeout(() => {
-
                                     window.location.href = "/"
                                 }, 3000);
                                 document.getElementById("wait").innerHTML = "<div class='alert alert-primary' role='alert'>Enjoy your trip</div>"
@@ -76,14 +70,10 @@ class Payment extends React.Component {
             },
             error: function (err) {
                 if (err.status === 406)
-                    //alert('Credit Card Date Expired')
                     document.getElementById("Expired").innerHTML = "<div class='alert alert-danger' role='alert'> Credit Card Date Expired</div>"
 
                 if (err.status === 401)
-                    //alert('you enterd wrong information')
                     document.getElementById("Expired").innerHTML = "<div class='alert alert-danger' role='alert'> you enterd wrong information</div>"
-
-
             }
         })
     }

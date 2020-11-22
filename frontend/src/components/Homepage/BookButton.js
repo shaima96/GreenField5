@@ -1,11 +1,11 @@
 import React from 'react';
 import './A-Style.css';
 import { Link } from 'react-router-dom';
-
+//responsive
 const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
-
+//responsive
 const SIZES = ['btn--medium', 'btn--large'];
-
+//to redirect user to the trips page
 export const Button = ({
     children,
     type,

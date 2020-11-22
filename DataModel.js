@@ -1,8 +1,9 @@
-//to use process.env for deployment
+//to use process.env for deployment(check .env file!)
 const dotenv = require('dotenv')
 dotenv.config()
 //for mongo db 
 const mongoose = require('mongoose');
+//(check .env file!)
 mongoose.connect(process.env.DB_CONNECT, { useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true })
 var db = mongoose.connection
 //to check if there is a connection with db or not 
@@ -44,11 +45,10 @@ let paymentSchema = mongoose.Schema({
     cvv: Number,
     exDate: Date
 })
-// userSchema.index({ createdBy: 1, name: 1 }, { unique: true });
+
 let trips = mongoose.model("tripsinfo", tripsSchema);
 let users = mongoose.model("userinfo", userSchema);
 let payment = mongoose.model("paymentinfo", paymentSchema);
-
 
 module.exports.users = users
 module.exports.payment = payment

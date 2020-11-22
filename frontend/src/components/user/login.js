@@ -8,13 +8,11 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
-
-
     }
     this.handelchange = this.handelchange.bind(this)
     this.LoginHandler = this.LoginHandler.bind(this)
-
   }
+  //to send req to server to check user data to login 
   LoginHandler() {
     var data = {
       userPass: this.state.password,
@@ -25,6 +23,7 @@ class Login extends React.Component {
       url: "/login",
       data: data,
       success: (res) => {
+        //will send to homepage
         console.log(this.props)
         this.props.toggleuser()
         window.location.href = "/"
@@ -33,7 +32,6 @@ class Login extends React.Component {
         if (error.status === 410) {
           //alert('Empty data')
           document.getElementById("logPass").innerHTML = "<div class='alert alert-danger' role='alert'> You have to enter your email</div>"
-
         }
         if (error.status === 404) {
           document.getElementById("logPass").innerHTML = "<div class='alert alert-danger' role='alert'> Invaild Username</div>"
@@ -43,14 +41,9 @@ class Login extends React.Component {
         if (error.status === 400) {
           //alert('wrong password')
           document.getElementById("logPass").innerHTML = "<div class='alert alert-danger' role='alert'> Wrong Password</div>"
-
         }
-
-
       }
     })
-
-
   }
   handelchange(e) {
     this.setState({
@@ -64,9 +57,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="test">
-
         <div className="row">
-
           <div id="signin" className="col-sm-4 left form-group">
             <form action="#">
               <br></br>
@@ -76,8 +67,6 @@ class Login extends React.Component {
               <div>
                 <label>Your Email</label>
                 <input type="email" className="form-control inputhover" name="email" placeholder="Email" onChange={this.handelchange} />
-                {/* <small id="logErr"></small> */}
-                {/* <small id="emptyuser"></small> */}
               </div>
               <div>
                 <label>Password</label>
@@ -90,7 +79,6 @@ class Login extends React.Component {
               </div>
             </form>
           </div>
-
         </div>
       </div>
     )

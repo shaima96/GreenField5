@@ -50,9 +50,6 @@ npm run build
 npm install
 ```
 ```
-npm install -g nodemon
-```
-```
 npm start 
 ```
 open your localhost:4000

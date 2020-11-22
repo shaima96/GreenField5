@@ -15,53 +15,31 @@ class Trip extends React.Component {
             booked: false,
             whobookit: 0,
             maxnoPerTrip: 0
-
         }
-        this.booktrip = this.booktrip.bind(this)
     }
-
+//to get the one trip data from db and display it
     componentDidMount() {
         this.setState({
             thetrip: this.props.location.state.trip,
             whobookit: this.props.location.state.trip.idOfTourist.length,
             maxnoPerTrip: this.props.location.state.trip.maximumNumPerTrip
         })
-        // const { trip } = this.props.match.paras
-        // const { fromNotificaions } = this.props.location.state
-        // console.log("  ", fromNotificaions)
-        console.log(this.props.location.state.trip.idOfTourist.length)
-        console.log(this.props.location.state.userid)
-        // this.props.location.getup()
-
         document.documentElement.scrollTop = 0;
-
-    }
-
-
-    booktrip() {
-        console.log('clicked ')
-        this.props.location.paymentCheck()
-
     }
     render() {
         var today = new Date();
-
         let statedata = {}
         let pathname = '/trip'
         if (this.props.location.state.userid && this.props.location.state.trip) {
             var ex = new Date(this.props.location.state.trip.deadLine)
-            // console.log(this.props.location.state.userid, "userinfo")
             if (!this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid) && (this.state.maxnoPerTrip !== this.state.whobookit) && (ex.getTime() >= today.getTime())) {
-
                 pathname = '/payment'
-
                 statedata = {
                     tripid: this.props.location.state.trip._id,
                     userid: this.props.location.state.userid
                 }
             }
         }
-
 
         return (
             <div >
@@ -100,20 +78,16 @@ class Trip extends React.Component {
                             dayno: value,
                             dayinfo: this.state.thetrip.discription[value],
                             imgs: this.state.thetrip.image[parseInt(value) - 1]
-
                         }
                         return (<div><Day {...props}></Day>
                             <br></br></div>)
                     }
-
                     )}
                 </div>
-
 
                 <Link to={{
                     pathname: pathname,
                     state: statedata,
-                    // paymentCheck: this.props.paymentCheck
                 }}   >
                     <div style={{ 'display': 'block' }}>
                         <p align="center" style={{ 'marginTop': '60px' }}>
@@ -123,10 +97,7 @@ class Trip extends React.Component {
                                     if (!this.props.location.state.userid) {
                                         console.log(`you can't book the trip log in first`)
                                         document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>Sign Up To Book The Trip</strong></div>"
-
                                     }
-
-
                                     if (this.props.location.state.trip.idOfTourist.includes(this.props.location.state.userid))
                                         document.getElementById("nobook").innerHTML = "<div class='alert alert-secondary' role='alert'><strong>You had alredy book this trip!</strong></div>"
 

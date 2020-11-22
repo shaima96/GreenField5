@@ -8,25 +8,18 @@ class CardItem extends React.Component {
         this.state = {
 
         }
-
     }
+ //to control the css of the cards   
     render() {
         return (
-
             <>
                 <li className='cards__item' style={{ "backgroundColor": 'white' }}>
                     <Link className='cards__item__link' to={{
                         pathname: this.props.path,
                         state: {
-                            // hello: this.props.hello,
-                            // helloAgain: this.props.hello,
-                            // trip: this.props.trip,
                             trip: this.props.trip,
                             userid: this.props.userid._id
-
                         },
-                        getup: this.props.getup,
-                        paymentCheck: this.props.paymentCheck
                     }}>
                         <figure className='cards__item__pic-wrap' data-category={this.props.label}>
                             <img
