@@ -26,4 +26,11 @@ routers.post('/addtrip', tripController.updateTrip)
 routers.get('/filldata', tripController.fillTrips)
 routers.post('/getmytrips', tripController.getmytrips)
 
+
+//Feedback Controller 
+const feedbackController = require('./Controller/FeedbackController')
+routers.post('/addfeedback', feedbackController.addFeedback)
+
+
+
 module.exports = routers;

@@ -46,10 +46,18 @@ let paymentSchema = mongoose.Schema({
     exDate: Date
 })
 
+let feedbackSchema = mongoose.Schema({
+    userName: String,
+    userMail: { type: String, unique: true },
+    feedback:String
+})
+
+
 let trips = mongoose.model("tripsinfo", tripsSchema);
 let users = mongoose.model("userinfo", userSchema);
-let payment = mongoose.model("paymentinfo", paymentSchema);
+let payment = mongoose.model("paymentinfo", paymentSchema)
+let feedback = mongoose.model("feedback", feedbackSchema);
 
 module.exports.users = users
 module.exports.payment = payment
-module.exports.trips = trips
+module.exports.feedback = feedback

@@ -17,7 +17,7 @@ class Trip extends React.Component {
             maxnoPerTrip: 0
         }
     }
-//to get the one trip data from db and display it
+    //to get the one trip data from db and display it
     componentDidMount() {
         this.setState({
             thetrip: this.props.location.state.trip,
@@ -110,6 +110,7 @@ class Trip extends React.Component {
                                 }} />
                         </p>
                     </div></Link>
+
                 <br></br>
                 <div className="bookx">
                     <small id="nobook"></small>
