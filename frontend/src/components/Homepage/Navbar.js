@@ -3,15 +3,12 @@ import { Link } from "react-router-dom";
 import './A-Style.css';
 import { Button } from './Button';
 
-
 function Navbar() {
+    //responsive nav bar functionality
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-
     const handleClick = () => setClick(!click);
-
     const closeMobileMenu = () => setClick(false);
-
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
@@ -19,7 +16,6 @@ function Navbar() {
             setButton(true);
         }
     };
-
     useEffect(() => {
         showButton();
     }, []);

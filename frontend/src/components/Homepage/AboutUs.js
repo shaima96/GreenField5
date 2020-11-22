@@ -1,6 +1,7 @@
 import React from 'react';
 import './A-Style.css'
 
+//the quote section
 function AboutUs() {
     return (
         <div className='cards'>

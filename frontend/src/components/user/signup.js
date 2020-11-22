@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './login.css';
 import $ from 'jquery'
 
-
 class Signup extends Component {
     constructor(props) {
         super(props);
@@ -25,10 +24,10 @@ class Signup extends Component {
         this.setState({
             newsCheck: !this.state.newsCheck
         })
-        //alert('Thank you for Subscribing to our News Letter')
         if (!this.state.newsCheck) { document.getElementById("subscribed").innerHTML = "<div class='alert alert-primary' role='alert'>Thank you for Subscribing to our News Letter</div>" }
         else { document.getElementById("subscribed").innerHTML = "<div></div>" }
     }
+    //to get the data for sign in 
     handelchange(e) {
         console.log(e.target.name)
         this.setState({
@@ -61,34 +60,22 @@ class Signup extends Component {
                     success: function (res) {
                         console.log("it's working")
                         window.location.href = "/"
-
                     },
                     error: function (error) {
                         if (error.status === 451) {
                             console.log('451')
-
                             document.getElementById("matchPass").innerHTML = "<div class='alert alert-danger' role='alert'> You have to enter your name</div>"
-
                         }
 
                         if (error.status === 411) {
-                            //alert('wrong password')
                             document.getElementById("matchPass").innerHTML = "<div class='alert alert-danger' role='alert'> You have to enter your email</div>"
-
                         }
 
                         if (error.status === 421) {
-
                             document.getElementById("matchPass").innerHTML = "<div class='alert alert-danger' role='alert'> You have to enter your password</div>"
-
                         }
-
-
-
                         if (error.status === 406) {
-                            //alert('already created user with this Email')
                             document.getElementById("matchPass").innerHTML = "<div class='alert alert-danger' role='alert'> This email has been used</div>"
-
                             console.log(error.responseText)
                         }
                     }
@@ -96,19 +83,14 @@ class Signup extends Component {
 
             }
             else {
-                //alert("Password not matche");
                 document.getElementById("matchPass").innerHTML = "<div class='alert alert-danger' role='alert'> passwords don't match</div>"
-
             }
     }
     render() {
 
         return (
             <div className="test">
-
                 <div className="row">
-
-
                     <div id="signup" className="col-sm-4 right" >
                         <form action="#" className='form1' >
                             <br></br>
@@ -118,8 +100,6 @@ class Signup extends Component {
                             <div>
                                 <label>First Name</label>
                                 <input type="string" className="form-control inputhover" onChange={this.handelchange} name="firstName" placeholder="First Name" />
-
-                                {/* <small id="emptyname"> </small> */}
                             </div>
                             <div>
                                 <label>Last Name</label>
@@ -129,8 +109,6 @@ class Signup extends Component {
                             <div>
                                 <label>Email</label>
                                 <input type="email" className="form-control inputhover" onChange={this.handelchange} name="email" placeholder="Email" />
-                                {/* <small id="userCreated"> </small> */}
-                                {/* <small id="emptyusermail"> </small> */}
                             </div>
                             <div>
                                 <label>Phone Number</label>
@@ -140,14 +118,12 @@ class Signup extends Component {
                                 <label>Password</label>
 
                                 <input type="password" className="form-control inputhover" onChange={this.handelchange} name="password" placeholder="Password" />
-                                {/* <small id='emptypass'></small> */}
                             </div>
                             <div>
                                 <lable>Confirm Password</lable>
                                 <input type="password" className="form-control inputhover" onChange={this.handelchange} name="conformPassword" placeholder="Confirm Password" />
                             </div>
                             <div style={{ "marginTop": '4px', "margin-left": "10%", "margin-right": "10%" }}>
-
                                 <div>
                                     <lable>Put URL link for your image</lable>
                                     <input type="string" className="form-control inputhover" onChange={this.handelchange} name="urlimage" placeholder="URLimage" />
@@ -156,17 +132,12 @@ class Signup extends Component {
                                 <div style={{ "marginBottom": '0' }}>
                                     <label class="form-check-label" for="exampleCheck1">Subscribe To Our News Letter</label>
                                     <small id="subscribed"></small>
-
-
                                 </div>
-
                             </div>
                             <div>
                                 <small id="matchPass"></small>
                                 <input type='button' value='Sign Up!' onClick={this.LoginHandler} className="btn btn-secondary" style={{ "display": 'inline-block', "marginRight": '4px' }}></input>
-
                                 <small id="LoginupSwitch" className="form-text text-muted" style={{ "display": 'inline-block' }} onClick={this.props.toggleLogin}>Have an account? Login Here.</small>
-
                             </div>
                         </form>
                     </div>

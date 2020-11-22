@@ -5,13 +5,11 @@ import { Button } from './LogoutButton';
 
 
 function Navbar() {
+    //for responsive
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
-
     const handleClick = () => setClick(!click);
-
     const closeMobileMenu = () => setClick(false);
-
     const showButton = () => {
         if (window.innerWidth <= 960) {
             setButton(false);
@@ -19,7 +17,6 @@ function Navbar() {
             setButton(true);
         }
     };
-
     useEffect(() => {
         showButton();
     }, []);

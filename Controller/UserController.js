@@ -1,14 +1,16 @@
+//requiring the user schema
 const UserModel = require('../DataModel').users
+//for the hashing password
 const bcrypt = require('bcryptjs')
 //JWT
 const jwt = require('jsonwebtoken');
-const { use } = require('../routes');
 
+//sign up functionallity
 exports.signUpUser = async (req, res) => {
+    //salting
     const salt = await bcrypt.genSalt(10)
     const hashedPass = await bcrypt.hash(req.body.userPass, salt)
     // User Data when Signing up
-    console.log(req.body)
     userMail = req.body.userMail
     userpas = req.body.userPass
     if (!req.body.userfirstName) {
@@ -20,12 +22,13 @@ exports.signUpUser = async (req, res) => {
     if (!userMail) {
         return res.status(411).send('error')
     }
-
+    //to check if the email is already used.
     UserModel.findOne({ userMail: req.body.userMail }, (err, user) => {
         if (err) {
             console.log(err)
             return res.status(400).send('error')
         }
+        //not used before - create a new user
         if (!user) {
             var newuser = new UserModel()
             newuser.userName = req.body.userName
@@ -40,11 +43,9 @@ exports.signUpUser = async (req, res) => {
                     console.log(err)
                     return res.status(400).send('error')
                 }
-                // console.log("saving user", saveduse)
                 var token = jwt.sign({ _id: saveduse._id }, process.env.TOKEN_SECRET)
                 res.cookie('authToken', token)
                 return res.status(200).send('created')
-
             })
         }
         else
@@ -52,6 +53,7 @@ exports.signUpUser = async (req, res) => {
     })
 }
 
+//loging in 
 exports.loginUser = (req, res) => {
     var userMail = req.body.userMail
     if (!userMail) {
@@ -80,15 +82,16 @@ exports.loginUser = (req, res) => {
     })
 }
 
+//logout to remove token (token value = empty)
 exports.userlogout = (req, res) => {
     res.cookie('authToken', '')
     res.status(200).send(req.user)
-
-
 }
 
+//to check if the user is logged in 
 exports.checkuser = (req, res) => { return (req.user) }
 
+//get user info and display it to user profile
 exports.getuserinfo = (req, res) => {
     UserModel.findOne({ _id: req.body.id }, (err, userData) => {
         console.log(req.body._id)

@@ -2,9 +2,6 @@ import React from 'react';
 import Carditem from './Carditem';
 import './A-Style.css'
 
-// import $ from 'jquery';
-
-
 class Cards extends React.Component {
     constructor(props) {
         super(props)
@@ -17,48 +14,35 @@ class Cards extends React.Component {
     }
 
     render() {
-        // console.log(this.props.testtrips)
         return (
             <div className='cards'>
                 <h1>Check Out Our Trips</h1>
                 <div className='cards__container'>
                     <div className="cards__wrapper">
                         <ul className="cards__items">
-                            {/* EDIT HERE */}
+                        {/* to display the 1st three trip */}
                             {this.props.testtrips.slice(0, 3).map((trip) =>
                                 <Carditem
                                     src={trip.image[0][0]}
-                                    // text={this.props.trip[0].explor}
                                     label={trip.name}
                                     text={trip.explore}
-                                    // hello={this.props.lable1}
                                     path='/trip'
-                                    // getup={this.props.getup}
                                     trip={trip}
-                                    paymentCheck={this.props.paymentCheck}
                                     userid={this.props.userid}
-
                                 />)}
-
                         </ul>
                         <ul className="cards__items">
+                        {/* to display the last two trips */}
                             {this.props.testtrips.slice(3, 5).map((trip) =>
                                 <Carditem
                                     src={trip.image[0][0]}
-                                    // text={this.props.trip[0].explor}
                                     label={trip.name}
-                                    // hello={this.props.lable1}
                                     text={trip.explore}
-
                                     path='/trip'
                                     userid={this.props.userid}
-
-                                    // getup={this.props.getup}
                                     trip={trip}
                                     paymentCheck={this.props.paymentCheck}
-
                                 />)}
-
                         </ul>
                     </div>
                 </div>

@@ -2,15 +2,14 @@ import React from 'react';
 import './A-Style.css';
 import { Link } from 'react-router-dom';
 import $ from 'jquery'
-
+//responsive
 const STYLES = ['btn--primary', 'btn--outline', 'btn--test'];
-
+//responsive
 const SIZES = ['btn--medium', 'btn--large'];
 
 export const Button = ({
     children,
     type,
-    onClick,
     buttonStyle,
     buttonSize
 }) => {
@@ -24,20 +23,18 @@ export const Button = ({
         <Link to='/' className='btn-mobile'>
             <button
                 className={`btn ${checkButtonStyle} ${checkButtonSize}`}
+                //log out on click 
+                //destroy the token 
                 onClick={() => {
                     $.ajax({
                         method: 'POST',
                         url: '/logout',
                         success: (res) => {
-                            console.log('see you another time')
                             window.location.href = "/"
                         },
                         error: (err) => {
                             console.log(err)
-
                         }
-
-
                     })
                 }}
                 type={type}
