@@ -1,11 +1,5 @@
-# Project Name : LafLefne 
-
-## Team
-  - Deema AbuZahra
-  - Emad Aqel
-  - Noor Aldeen Ashqer 
-  - Qamar Jaradat
-  - Razan Abusamra
+# Project Name
+LafLefne 
 
 ## Table of Contents
 
@@ -56,5 +50,12 @@ open your localhost:4000
 
 ### Picture Documentation
 ![Home Page](https://i.imgur.com/T6WHKg9.png)
+
+
+## Team
+ - [Hala](https://github.com/shaima96/) 
+ - [Kholoud](https://github.com/kholoudmohtaseb)
+ - [Shaima’](https://github.com/shaima96/)
+ - [Najwan](https://github.com/najwanqandeel)
 
 
